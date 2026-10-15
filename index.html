@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>کادوی جادویی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;600;800&display=swap">
+<style>
+:root{
+  --sky:#FFF3E4; --paper:#FFFFFF; --ink:#3B2A4F; --soft:#7A6A8C;
+  --pink:#FF8FB1; --pink-2:#FFE0EA; --sun:#FFC93C; --sun-2:#FFF1C7;
+  --mint:#5CCFB0; --mint-2:#D9F6EE; --line:#F0DCCB; --shadow:0 6px 0 #F0DCCB;
+  --chip:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --sky:#1E1830; --paper:#2A2240; --ink:#FBEFFF; --soft:#C3B4D6;
+    --pink:#FF8FB1; --pink-2:#4A2B45; --sun:#FFC93C; --sun-2:#4A3D22;
+    --mint:#5CCFB0; --mint-2:#1F4039; --line:#3D3258; --shadow:0 6px 0 #15101F;
+    --chip:#332A4D;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --sky:#1E1830; --paper:#2A2240; --ink:#FBEFFF; --soft:#C3B4D6;
+  --pink:#FF8FB1; --pink-2:#4A2B45; --sun:#FFC93C; --sun-2:#4A3D22;
+  --mint:#5CCFB0; --mint-2:#1F4039; --line:#3D3258; --shadow:0 6px 0 #15101F;
+  --chip:#332A4D;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--sky); color:var(--ink);
+  font-family:"Vazirmatn",Tahoma,system-ui,sans-serif; font-size:17px; line-height:1.9;
+  padding-inline:16px; padding-block:20px 40px; min-height:100%;
+  background-image:radial-gradient(circle at 12% 8%,var(--sun-2) 0 60px,transparent 61px),
+                   radial-gradient(circle at 92% 30%,var(--pink-2) 0 44px,transparent 45px),
+                   radial-gradient(circle at 6% 78%,var(--mint-2) 0 52px,transparent 53px);
+  background-attachment:fixed;
+}
+.book{max-width:520px;margin-inline:auto;display:flex;flex-direction:column;gap:18px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.stars{display:flex;gap:6px}
+.stars span{width:14px;height:14px;border-radius:50%;background:var(--line);transition:background .3s,transform .3s}
+.stars span.on{background:var(--sun);transform:scale(1.15)}
+.who{font-size:13px;font-weight:800;padding:4px 12px;border-radius:99px;background:var(--paper);border:2px solid var(--line)}
+.who.kid{background:var(--pink-2);border-color:var(--pink)}
+.who.mom{background:var(--mint-2);border-color:var(--mint)}
+.page{
+  background:var(--paper);border:3px solid var(--line);border-radius:28px;box-shadow:var(--shadow);
+  padding:24px 20px;display:flex;flex-direction:column;gap:16px;animation:pop .35s ease;
+}
+@keyframes pop{from{transform:translateY(10px) scale(.98)}to{transform:none}}
+h1,h2{font-family:"Lalezar","Vazirmatn",Tahoma,sans-serif;font-weight:400;margin:0;line-height:1.35;text-wrap:balance}
+h1{font-size:44px;color:var(--pink)}
+h2{font-size:30px}
+p{margin:0}
+.lead{font-size:19px}
+.muted{color:var(--soft);font-size:14px}
+.art{display:flex;justify-content:center}
+.art svg{width:100%;max-width:300px;height:auto}
+label.q{font-weight:800;font-size:18px}
+input[type=text],textarea{
+  width:100%;font:inherit;color:var(--ink);background:var(--sky);
+  border:3px solid var(--line);border-radius:18px;padding:12px 16px;
+}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:var(--pink)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.chip{
+  font:inherit;color:var(--ink);background:var(--chip);border:3px solid var(--line);border-radius:20px;
+  padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;
+  font-weight:600;font-size:15px;line-height:1.5;transition:transform .15s,border-color .15s,background .15s;
+}
+.chip .e{font-size:34px;line-height:1.2}
+.chip:active{transform:scale(.95)}
+.chip[aria-pressed="true"]{border-color:var(--pink);background:var(--pink-2);transform:rotate(-2deg)}
+.chip.row{flex-direction:row;justify-content:flex-start;gap:10px;padding:10px 14px;text-align:start}
+.chip.row .e{font-size:24px}
+.swatch{width:40px;height:40px;border-radius:50%;border:3px solid var(--paper);box-shadow:0 0 0 2px var(--line)}
+.nav{display:flex;gap:10px}
+.btn{
+  font:inherit;font-weight:800;font-size:18px;border:0;border-radius:99px;padding:14px 22px;cursor:pointer;
+  background:var(--pink);color:#3B1530;box-shadow:0 5px 0 #D8668C;flex:1;transition:transform .1s,box-shadow .1s;
+}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #D8668C}
+.btn.ghost{background:var(--paper);color:var(--ink);border:3px solid var(--line);box-shadow:none;flex:0 0 auto}
+.btn.mint{background:var(--mint);color:#0F3B30;box-shadow:0 5px 0 #3BA88A}
+.btn:focus-visible,.chip:focus-visible{outline:4px solid var(--sun);outline-offset:3px}
+.bubble{background:var(--sun-2);border-radius:22px;padding:14px 18px;position:relative;font-weight:600}
+.bubble::after{content:"";position:absolute;bottom:-12px;inset-inline-start:34px;border:12px solid transparent;border-top-color:var(--sun-2);border-bottom:0}
+.note{background:var(--mint-2);border-radius:18px;padding:12px 16px;font-size:14px;line-height:1.8}
+.letter{background:var(--sky);border:3px dashed var(--line);border-radius:20px;padding:16px;white-space:pre-wrap;font-size:15px;line-height:2}
+.toast{font-size:14px;font-weight:800;color:var(--mint);min-height:1.5em;text-align:center}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:9}
+@media (max-width:380px){.grid{grid-template-columns:repeat(2,1fr)} h1{font-size:38px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<main class="book">
+  <div class="top">
+    <div class="stars" id="stars" aria-hidden="true"></div>
+    <span class="who" id="who">قصه</span>
+  </div>
+  <section class="page" id="page" aria-live="polite"></section>
+</main>
+
+<script>
+const SVG = {
+  cover:`<svg viewBox="0 0 300 190" aria-hidden="true"><ellipse cx="150" cy="176" rx="120" ry="10" fill="var(--line)"/>
+    <rect x="80" y="70" width="140" height="100" rx="14" fill="var(--pink)"/><rect x="140" y="70" width="20" height="100" fill="var(--sun)"/>
+    <rect x="70" y="52" width="160" height="30" rx="10" fill="#FFA8C5"/><rect x="140" y="52" width="20" height="30" fill="var(--sun)"/>
+    <path d="M150 52c-30-40-62-10-36 0zM150 52c30-40 62-10 36 0z" fill="var(--sun)"/>
+    <circle cx="44" cy="40" r="6" fill="var(--sun)"/><circle cx="262" cy="30" r="8" fill="var(--mint)"/><circle cx="250" cy="120" r="5" fill="var(--pink)"/><circle cx="38" cy="130" r="7" fill="var(--mint)"/></svg>`,
+  home:`<svg viewBox="0 0 300 190" aria-hidden="true"><circle cx="250" cy="40" r="24" fill="var(--sun)"/>
+    <path d="M60 90 140 30 220 90z" fill="var(--pink)"/><rect x="74" y="88" width="132" height="86" rx="6" fill="var(--sun-2)" stroke="var(--line)" stroke-width="3"/>
+    <rect x="124" y="122" width="32" height="52" rx="6" fill="var(--mint)"/><rect x="88" y="104" width="26" height="26" rx="5" fill="#9FD8F5"/><rect x="166" y="104" width="26" height="26" rx="5" fill="#9FD8F5"/>
+    <circle cx="246" cy="150" r="14" fill="#FFB36B"/><rect x="236" y="164" width="20" height="16" rx="6" fill="var(--pink)"/>
+    <circle cx="272" cy="140" r="17" fill="#FFB36B"/><rect x="258" y="157" width="28" height="23" rx="8" fill="var(--mint)"/></svg>`,
+  phone:`<svg viewBox="0 0 300 190" aria-hidden="true"><rect x="106" y="14" width="88" height="164" rx="18" fill="var(--ink)"/><rect x="114" y="28" width="72" height="136" rx="10" fill="var(--sky)"/>
+    <circle cx="150" cy="70" r="20" fill="var(--pink-2)" stroke="var(--pink)" stroke-width="3"/><rect x="126" y="100" width="48" height="8" rx="4" fill="var(--line)"/><rect x="132" y="114" width="36" height="8" rx="4" fill="var(--line)"/>
+    <path d="M60 60c-14-16-36 2-18 18l18 16 18-16c18-16-4-34-18-18z" fill="var(--pink)"/><path d="M240 100c-10-12-27 1-13 13l13 12 13-12c14-12-3-25-13-13z" fill="var(--sun)"/>
+    <circle cx="232" cy="40" r="6" fill="var(--mint)"/><circle cx="64" cy="140" r="7" fill="var(--sun)"/></svg>`,
+  wand:`<svg viewBox="0 0 300 190" aria-hidden="true"><rect x="70" y="120" width="140" height="14" rx="7" transform="rotate(-30 140 127)" fill="var(--ink)"/>
+    <path d="M214 40l10 22 24 3-18 16 5 24-21-12-21 12 5-24-18-16 24-3z" fill="var(--sun)"/>
+    <circle cx="90" cy="50" r="6" fill="var(--pink)"/><circle cx="262" cy="130" r="8" fill="var(--mint)"/><circle cx="170" cy="20" r="5" fill="var(--pink)"/><circle cx="270" cy="30" r="4" fill="var(--mint)"/></svg>`
+};
+
+const COLORS=[["صورتی","#FF8FB1"],["بنفش","#B48CFF"],["آبی","#5AB8F5"],["سبز","#5CCFB0"],["زرد","#FFC93C"],["قرمز","#FF5A5F"]];
+const ANIMALS=[["🐰","خرگوش"],["🐱","گربه"],["🐶","سگ"],["🦄","اسب‌شاخدار"],["🐼","پاندا"],["🦋","پروانه"],["🐻","خرس"],["🐠","ماهی"],["🦁","شیر"]];
+const GIFTS=[["🧸","عروسک"],["🎨","وسیلهٔ نقاشی"],["🧱","لگو و ساختنی"],["📚","کتابِ قصه"],["👗","لباس"],["🎀","گل‌سر و تل"],["🧩","پازل و بازی"],["🎒","کوله و جامدادی"],["💍","دستبند و انگشتر"],["🎤","وسیلهٔ موسیقی"],["⚽","توپ و بازیِ بیرون"],["✨","سورپرایز!"]];
+const FUN=[["💃","رقصیدن"],["🎨","نقاشی"],["📖","قصه"],["🎶","آواز"],["🏃‍♀️","دویدن و بازی"],["🍳","آشپزی"]];
+const MOM_NO=[["🍬","خوراکی و شکلات"],["🔊","اسباب‌بازیِ پرسروصدا"],["🔩","چیزِ ریز (برای بچهٔ کوچک‌تر)"],["📱","گوشی و تبلت"],["💄","لوازمِ آرایش"]];
+
+const KEY="kado-v1";
+let S={name:"",color:[],animal:[],gift:[],fun:[],wish:"",age:"",size:"",no:[],momMsg:""};
+try{const v=JSON.parse(localStorage.getItem(KEY)||"null"); if(v) S={...S,...v};}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+const nm=()=>S.name.trim()||"دخترِ قصه";
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const chips=(key,list,{multi=true,row=false}={})=>`<div class="grid ${row?"two":""}">${list.map(([e,t])=>`
+  <button type="button" class="chip ${row?"row":""}" data-k="${key}" data-v="${esc(t)}" data-m="${multi}" aria-pressed="${S[key].includes(t)}">
+  <span class="e">${e}</span><span>${t}</span></button>`).join("")}</div>`;
+const colorChips=()=>`<div class="grid">${COLORS.map(([t,h])=>`
+  <button type="button" class="chip" data-k="color" data-v="${t}" data-m="true" aria-pressed="${S.color.includes(t)}">
+  <span class="swatch" style="background:${h}"></span><span>${t}</span></button>`).join("")}</div>`;
+
+const PAGES=[
+ {who:"قصه",cls:"",html:()=>`
+   <div class="art">${SVG.cover}</div>
+   <h1>کادوی جادویی</h1>
+   <p class="lead">یه قصهٔ کوچولو برای مامان و دخترِ قشنگش. مامان قصه رو بلند می‌خونه، دختر انتخاب می‌کنه.</p>
+   <label class="q" for="name">اسمِ دخترِ قصه چیه؟</label>
+   <input id="name" type="text" placeholder="مثلاً: نازنین" value="${esc(S.name)}" autocomplete="off">
+   <div class="nav"><button class="btn" data-go="1">قصه رو شروع کن</button></div>`},
+ {who:"قصه",cls:"",html:()=>`
+   <div class="art">${SVG.home}</div>
+   <h2>یکی بود، یکی نبود…</h2>
+   <p class="lead">یه دخترِ کوچولوی مهربون بود به اسمِ <b>${esc(nm())}</b>. ${esc(nm())} با مامانش توی یه خونهٔ گرم و پرنور زندگی می‌کرد. مامانش هر شب براش قصه می‌گفت و ${esc(nm())} هم کلی چیزِ قشنگ دوست داشت.</p>`},
+ {who:"قصه",cls:"",html:()=>`
+   <div class="art">${SVG.phone}</div>
+   <h2>یه دوستِ تازه</h2>
+   <p class="lead">یه روز مامان توی اینستاگرام با یه دوستِ خوب آشنا شد. مامان از دخترش تعریف کرد و دوستش خیلی خوشحال شد که یه دخترِ به این نازی هست.</p>`},
+ {who:"قصه",cls:"",html:()=>`
+   <div class="art">${SVG.wand}</div>
+   <h2>کادو چی باشه؟</h2>
+   <div class="bubble">«من دلم می‌خواد برای ${esc(nm())} یه کادو بفرستم! ولی نمی‌دونم چی دوست داره…»</div>
+   <p class="lead">برای همین دوستِ مامان این دفترچهٔ جادویی رو درست کرد. حالا ${esc(nm())} خودش می‌گه چی دوست داره. هر جواب یه ستاره روشن می‌کنه!</p>`},
+ {who:"نوبتِ "+"دختر",cls:"kid",html:()=>`
+   <h2>رنگِ محبوبت کدومه؟</h2><p class="muted">هر چندتا که دوست داری بزن.</p>${colorChips()}`},
+ {who:"نوبتِ دختر",cls:"kid",html:()=>`
+   <h2>کدوم حیوون رو بیشتر دوست داری؟</h2>${chips("animal",ANIMALS)}`},
+ {who:"نوبتِ دختر",cls:"kid",html:()=>`
+   <h2>دوست داری کادوت چی باشه؟</h2><p class="muted">می‌تونی چندتا انتخاب کنی.</p>${chips("gift",GIFTS)}`},
+ {who:"نوبتِ دختر",cls:"kid",html:()=>`
+   <h2>بیشتر از همه عاشقِ چی هستی؟</h2>${chips("fun",FUN)}`},
+ {who:"نوبتِ دختر",cls:"kid",html:()=>`
+   <h2>یه آرزوی بزرگ!</h2>
+   <p class="lead">اگه یه چیز رو بتونی همین الان داشته باشی، اون چیه؟ بگو تا مامان برات بنویسه.</p>
+   <label class="q" for="wish">آرزوی ${esc(nm())}</label>
+   <textarea id="wish" placeholder="مثلاً: یه عروسکِ خرگوشی که گوش‌های بلند داره">${esc(S.wish)}</textarea>`},
+ {who:"نوبتِ مامان",cls:"mom",html:()=>`
+   <h2>حالا نوبتِ مامانه</h2>
+   <p class="lead">چندتا سؤالِ کوچیک تا کادو درست انتخاب بشه.</p>
+   <label class="q" for="age">${esc(nm())} چند سالشه؟</label>
+   <input id="age" type="text" inputmode="numeric" placeholder="مثلاً: ۶ سال" value="${esc(S.age)}">
+   <label class="q" for="size">سایزِ لباس (اگه لباس هم خوبه)</label>
+   <input id="size" type="text" placeholder="مثلاً: ۶ تا ۷ سال" value="${esc(S.size)}">
+   <p class="q">چیزی که مناسب نیست؟</p>${chips("no",MOM_NO,{row:true})}`},
+ {who:"نوبتِ مامان",cls:"mom",html:()=>`
+   <h2>یه پیام به دوستت</h2>
+   <label class="q" for="momMsg">جوابِ مامان</label>
+   <textarea id="momMsg" placeholder="مثلاً: ممنون که به فکرِ دخترم بودی، خیلی ذوق کرد!">${esc(S.momMsg)}</textarea>
+   <div class="note">این دفترچه هیچ‌چیزی رو خودش جایی نمی‌فرسته. صفحهٔ بعد متن آماده می‌شه و خودت، اگه خواستی، برای دوستت می‌فرستی. آدرس، مدرسه یا عکس لازم نیست.</div>`},
+ {who:"پایانِ قصه",cls:"",html:()=>`
+   <h2>و این‌طوری دوستِ مامان فهمید ${esc(nm())} چی دوست داره!</h2>
+   <p class="lead">آفرین ${esc(nm())}! همهٔ ستاره‌ها روشن شد. قصهٔ ما به سر رسید، کادو هم به‌زودی می‌رسه.</p>
+   <div class="letter" id="letter">${esc(letter())}</div>
+   <div class="nav"><button class="btn mint" id="copy">کپیِ متن برای فرستادن</button></div>
+   <p class="toast" id="toast" role="status"></p>
+   <button class="btn ghost" id="again">از اول</button>`}
+];
+const STORY_END=3, LAST=PAGES.length-1;
+
+function letter(){
+  const L=(a)=>a.length?a.join("، "):"—";
+  return `سلام! من ${nm()} هستم 🌸
+رنگِ محبوبم: ${L(S.color)}
+حیوونِ محبوبم: ${L(S.animal)}
+دوست دارم کادوم این باشه: ${L(S.gift)}
+عاشقِ: ${L(S.fun)}
+آرزوی بزرگم: ${S.wish.trim()||"—"}
+
+از طرفِ مامان:
+سن: ${S.age.trim()||"—"}${S.size.trim()?`\nسایزِ لباس: ${S.size.trim()}`:""}
+مناسب نیست: ${L(S.no)}
+${S.momMsg.trim()||""}`.trim();
+}
+
+let cur=0;
+try{const c=+localStorage.getItem(KEY+"-p"); if(c>=0&&c<=LAST) cur=c;}catch(e){}
+const page=document.getElementById("page"), who=document.getElementById("who"), stars=document.getElementById("stars");
+const KID=[4,5,6,7,8,9,10]; // صفحه‌هایی که ستاره روشن می‌کنند
+stars.innerHTML=KID.map(()=>"<span></span>").join("");
+
+function render(){
+  const P=PAGES[cur];
+  who.textContent=P.who; who.className="who "+P.cls;
+  let nav="";
+  if(cur>0 && cur<LAST) nav=`<div class="nav"><button class="btn ghost" data-go="${cur-1}" aria-label="صفحهٔ قبل">قبلی</button><button class="btn ${P.cls==="mom"?"mint":""}" data-go="${cur+1}">${cur===STORY_END?"بریم انتخاب کنیم!":cur===LAST-1?"تمومه!":"بعدی"}</button></div>`;
+  page.innerHTML=P.html()+nav;
+  page.style.animation="none"; void page.offsetWidth; page.style.animation="";
+  [...stars.children].forEach((s,i)=>s.classList.toggle("on",cur>KID[i]));
+  try{localStorage.setItem(KEY+"-p",cur)}catch(e){}
+  if(cur===LAST) confetti();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+page.addEventListener("input",e=>{const id=e.target.id; if(id in S){S[id]=e.target.value; save();}});
+page.addEventListener("click",e=>{
+  const c=e.target.closest(".chip");
+  if(c){const k=c.dataset.k,v=c.dataset.v; const i=S[k].indexOf(v);
+    i>=0?S[k].splice(i,1):S[k].push(v); c.setAttribute("aria-pressed",i<0); save(); if(i<0) sparkle(c); return;}
+  const g=e.target.closest("[data-go]"); if(g){cur=+g.dataset.go; render(); return;}
+  if(e.target.id==="copy"){
+    const txt=letter(), t=document.getElementById("toast");
+    navigator.clipboard?.writeText(txt).then(()=>t.textContent="کپی شد! حالا توی پیامِ اینستاگرام بچسبون.")
+      .catch(()=>{const r=document.createRange(); r.selectNodeContents(document.getElementById("letter"));
+        const s=getSelection(); s.removeAllRanges(); s.addRange(r); t.textContent="متن انتخاب شد؛ نگه دار و «کپی» رو بزن.";})
+      ?? (t.textContent="متن رو نگه دار و کپی کن.");
+  }
+  if(e.target.id==="again"){S={name:S.name,color:[],animal:[],gift:[],fun:[],wish:"",age:"",size:"",no:[],momMsg:""}; save(); cur=0; render();}
+});
+
+const cv=document.getElementById("confetti"), cx=cv.getContext("2d");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function burst(x,y,n,spread){
+  if(reduce) return;
+  cv.width=innerWidth; cv.height=innerHeight;
+  const cols=["#FF8FB1","#FFC93C","#5CCFB0","#B48CFF","#5AB8F5"];
+  const ps=Array.from({length:n},()=>({x,y,vx:(Math.random()-.5)*spread,vy:-Math.random()*spread-2,r:3+Math.random()*4,c:cols[Math.random()*5|0],a:1}));
+  (function f(){cx.clearRect(0,0,cv.width,cv.height); let alive=0;
+    ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.25;p.a-=.012; if(p.a>0){alive++;cx.globalAlpha=p.a;cx.fillStyle=p.c;cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill();}});
+    cx.globalAlpha=1; if(alive) requestAnimationFrame(f); else cx.clearRect(0,0,cv.width,cv.height);})();
+}
+function sparkle(el){const r=el.getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2,18,6);}
+function confetti(){burst(innerWidth/2,innerHeight/3,140,14);}
+
+document.documentElement.dir="rtl"; document.documentElement.lang="fa";
+render();
+</script>
+
+</body>
+</html>
