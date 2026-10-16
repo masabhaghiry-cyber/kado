@@ -47,7 +47,7 @@ p{margin:0}.muted{color:var(--soft);font-size:15px}.lead{font-size:19px}
 .chip small{font-weight:400;color:var(--soft);font-size:12.5px;line-height:1.5}
 .chip:active{transform:scale(.95)}
 .chip[aria-pressed="true"]{border-color:var(--pink);background:var(--pink-2);transform:rotate(-1.5deg)}
-.chip[aria-pressed="true"]::after{content:"✓";position:absolute;top:6px;inset-inline-end:8px;width:24px;height:24px;border-radius:50%;background:var(--pink);color:#fff;font-size:14px;line-height:24px}
+.chip[aria-pressed="true"]::after{content:"✓";position:absolute;top:6px;left:8px;width:24px;height:24px;border-radius:50%;background:var(--pink);color:#fff;font-size:14px;line-height:24px}
 .chip.row{flex-direction:row;justify-content:flex-start;gap:12px;text-align:start;padding:12px 14px;min-height:0}
 .chip.row .e{font-size:32px}
 .chip.row span:last-child{display:flex;flex-direction:column}
@@ -214,10 +214,10 @@ const STEPS=[
  {who:"نوبتِ تو",kid:1,h:()=>`<h2>وقتی یه کار رو تموم می‌کنی چه صدایی بیاد؟</h2><p class="muted">بزن تا صداش رو بشنوی.</p>
    ${pick("sound",SOUNDS.map(s=>({v:s[0],s})),{fn:it=>`<span class="e">${it.s[2]}</span><span>${it.s[1]}</span>`})}
    <h2 style="font-size:24px">وقتی همهٔ کارهای روز تموم شد، چه جشنی بگیریم؟</h2>${pick("party",PARTY,{multi:true})}`},
- {who:"نوبتِ تو",kid:1,h:()=>`<h2>توی برنامه‌ات چی می‌خوای باشه؟</h2><p class="muted">هر چندتا که دوست داری بزن. <span class="count">${S.features.length} تا انتخاب کردی</span></p>
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>توی برنامه‌ات چی می‌خوای باشه؟</h2><p class="muted">هر چندتا که دوست داری بزن. <span class="count">${S.features.length.toLocaleString("fa-IR")} تا انتخاب کردی</span></p>
    ${pick("features",FEATURES.map(f=>({v:f[0],f,row:1})),{multi:true,cls:"wide",fn:it=>`<span class="e">${it.f[1]}</span><span><b>${it.f[2]}</b><small>${it.f[3]}</small></span>`})}`},
  {who:"نوبتِ تو",kid:1,h:()=>{const mine=FEATURES.filter(f=>S.features.includes(f[0]));
-   return `<h2>از این‌ها کدوم ۳ تا رو از همه بیشتر دوست داری؟</h2><p class="muted">این سه‌تا رو اول برات می‌سازیم. <span class="count">${S.top.length} از ۳</span></p>
+   return `<h2>از این‌ها کدوم ۳ تا رو از همه بیشتر دوست داری؟</h2><p class="muted">این سه‌تا رو اول برات می‌سازیم. <span class="count">${S.top.length.toLocaleString("fa-IR")} از ۳</span></p>
    ${mine.length?pick("top",mine.map(f=>({v:f[0],f,row:1})),{multi:true,max:3,cls:"wide",fn:it=>`<span class="e">${it.f[1]}</span><span><b>${it.f[2]}</b></span>`}):`<p class="bubble">اول توی صفحهٔ قبل چندتا چیز انتخاب کن.</p>`}`}},
  {who:"نوبتِ تو",kid:1,h:()=>`<h2>چه کارهایی می‌خوای هر روز انجام بدی؟</h2>
    ${Object.entries(TASKS).map(([p,l])=>`<p class="q">${p==="صبح"?"☀️":p==="عصر"?"🌤️":"🌙"} ${p}</p>${pick("tasks",l.map(t=>({v:p+": "+t[1],t})),{multi:true,fn:it=>`<span class="e">${it.t[0]}</span><span>${it.t[1]}</span>`})}`).join("")}
