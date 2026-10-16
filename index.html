@@ -3,279 +3,377 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>کادوی جادویی</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#FFF3E4">
+<title>کادو از طرفِ یه دوست</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Baloo+Bhaijaan+2:wght@500;700&family=Lemonada:wght@500;700&family=Vazirmatn:wght@400;600;800&display=swap">
 <style>
 :root{
+  color-scheme:light;
   --sky:#FFF3E4; --paper:#FFFFFF; --ink:#3B2A4F; --soft:#7A6A8C;
   --pink:#FF8FB1; --pink-2:#FFE0EA; --sun:#FFC93C; --sun-2:#FFF1C7;
-  --mint:#5CCFB0; --mint-2:#D9F6EE; --line:#F0DCCB; --shadow:0 6px 0 #F0DCCB;
-  --chip:#FFFFFF;
+  --mint:#5CCFB0; --mint-2:#D9F6EE; --line:#F0DCCB; --shadow:0 6px 0 #F0DCCB; --chip:#FFFFFF;
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
+  :root{color-scheme:dark;
     --sky:#1E1830; --paper:#2A2240; --ink:#FBEFFF; --soft:#C3B4D6;
-    --pink:#FF8FB1; --pink-2:#4A2B45; --sun:#FFC93C; --sun-2:#4A3D22;
-    --mint:#5CCFB0; --mint-2:#1F4039; --line:#3D3258; --shadow:0 6px 0 #15101F;
-    --chip:#332A4D;
-  }
+    --pink-2:#4A2B45; --sun-2:#4A3D22; --mint-2:#1F4039; --line:#3D3258; --shadow:0 6px 0 #15101F; --chip:#332A4D;}
 }
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --sky:#1E1830; --paper:#2A2240; --ink:#FBEFFF; --soft:#C3B4D6;
-  --pink:#FF8FB1; --pink-2:#4A2B45; --sun:#FFC93C; --sun-2:#4A3D22;
-  --mint:#5CCFB0; --mint-2:#1F4039; --line:#3D3258; --shadow:0 6px 0 #15101F;
-  --chip:#332A4D;
-}
-*{box-sizing:border-box}
-body{
-  background:var(--sky); color:var(--ink);
-  font-family:"Vazirmatn",Tahoma,system-ui,sans-serif; font-size:17px; line-height:1.9;
-  padding-inline:16px; padding-block:20px 40px; min-height:100%;
-  background-image:radial-gradient(circle at 12% 8%,var(--sun-2) 0 60px,transparent 61px),
-                   radial-gradient(circle at 92% 30%,var(--pink-2) 0 44px,transparent 45px),
-                   radial-gradient(circle at 6% 78%,var(--mint-2) 0 52px,transparent 53px);
-  background-attachment:fixed;
-}
-.book{max-width:520px;margin-inline:auto;display:flex;flex-direction:column;gap:18px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.stars{display:flex;gap:6px}
-.stars span{width:14px;height:14px;border-radius:50%;background:var(--line);transition:background .3s,transform .3s}
-.stars span.on{background:var(--sun);transform:scale(1.15)}
-.who{font-size:13px;font-weight:800;padding:4px 12px;border-radius:99px;background:var(--paper);border:2px solid var(--line)}
-.who.kid{background:var(--pink-2);border-color:var(--pink)}
-.who.mom{background:var(--mint-2);border-color:var(--mint)}
-.page{
-  background:var(--paper);border:3px solid var(--line);border-radius:28px;box-shadow:var(--shadow);
-  padding:24px 20px;display:flex;flex-direction:column;gap:16px;animation:pop .35s ease;
-}
-@keyframes pop{from{transform:translateY(10px) scale(.98)}to{transform:none}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--sky);color:var(--ink);font-family:"Vazirmatn",Tahoma,system-ui,sans-serif;font-size:17px;line-height:1.85;
+  padding-inline:16px;padding-block:calc(env(safe-area-inset-top,0px) + 14px) calc(env(safe-area-inset-bottom,0px) + 40px);min-height:100vh}
+.wrap{max-width:1100px;margin-inline:auto;display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:860px){.wrap{grid-template-columns:minmax(0,1fr) 340px;align-items:start}.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 14px)}}
 h1,h2{font-family:"Lalezar","Vazirmatn",Tahoma,sans-serif;font-weight:400;margin:0;line-height:1.35;text-wrap:balance}
-h1{font-size:44px;color:var(--pink)}
-h2{font-size:30px}
-p{margin:0}
-.lead{font-size:19px}
-.muted{color:var(--soft);font-size:14px}
-.art{display:flex;justify-content:center}
-.art svg{width:100%;max-width:300px;height:auto}
-label.q{font-weight:800;font-size:18px}
-input[type=text],textarea{
-  width:100%;font:inherit;color:var(--ink);background:var(--sky);
-  border:3px solid var(--line);border-radius:18px;padding:12px 16px;
-}
-textarea{min-height:96px;resize:vertical}
-input:focus,textarea:focus{outline:none;border-color:var(--pink)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.grid.two{grid-template-columns:repeat(2,1fr)}
-.chip{
-  font:inherit;color:var(--ink);background:var(--chip);border:3px solid var(--line);border-radius:20px;
-  padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;
-  font-weight:600;font-size:15px;line-height:1.5;transition:transform .15s,border-color .15s,background .15s;
-}
-.chip .e{font-size:34px;line-height:1.2}
+h1{font-size:42px;color:var(--pink)} h2{font-size:30px}
+p{margin:0}.muted{color:var(--soft);font-size:15px}.lead{font-size:19px}
+.main{display:flex;flex-direction:column;gap:14px;min-width:0}
+.bar{display:flex;align-items:center;gap:10px}
+.prog{flex:1;height:12px;border-radius:9px;background:var(--line);overflow:hidden}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),var(--pink));border-radius:9px;transition:width .4s}
+.who{font-size:13px;font-weight:800;padding:3px 12px;border-radius:99px;border:2px solid var(--line);background:var(--paper);white-space:nowrap}
+.who.kid{background:var(--pink-2);border-color:var(--pink)}.who.mom{background:var(--mint-2);border-color:var(--mint)}
+.card{background:var(--paper);border:3px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:22px 20px;display:flex;flex-direction:column;gap:16px;animation:pop .3s ease}
+@keyframes pop{from{transform:translateY(8px) scale(.985)}to{transform:none}}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
+.grid.big{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.grid.wide{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.chip{font:inherit;color:var(--ink);background:var(--chip);border:3px solid var(--line);border-radius:22px;padding:10px 8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;font-weight:700;font-size:15px;line-height:1.45;text-align:center;
+  transition:transform .15s,border-color .15s,background .15s;min-height:92px;position:relative}
+.chip .e{font-size:38px;line-height:1.15}
+.chip small{font-weight:400;color:var(--soft);font-size:12.5px;line-height:1.5}
 .chip:active{transform:scale(.95)}
-.chip[aria-pressed="true"]{border-color:var(--pink);background:var(--pink-2);transform:rotate(-2deg)}
-.chip.row{flex-direction:row;justify-content:flex-start;gap:10px;padding:10px 14px;text-align:start}
-.chip.row .e{font-size:24px}
-.swatch{width:40px;height:40px;border-radius:50%;border:3px solid var(--paper);box-shadow:0 0 0 2px var(--line)}
-.nav{display:flex;gap:10px}
-.btn{
-  font:inherit;font-weight:800;font-size:18px;border:0;border-radius:99px;padding:14px 22px;cursor:pointer;
-  background:var(--pink);color:#3B1530;box-shadow:0 5px 0 #D8668C;flex:1;transition:transform .1s,box-shadow .1s;
-}
+.chip[aria-pressed="true"]{border-color:var(--pink);background:var(--pink-2);transform:rotate(-1.5deg)}
+.chip[aria-pressed="true"]::after{content:"✓";position:absolute;top:6px;inset-inline-end:8px;width:24px;height:24px;border-radius:50%;background:var(--pink);color:#fff;font-size:14px;line-height:24px}
+.chip.row{flex-direction:row;justify-content:flex-start;gap:12px;text-align:start;padding:12px 14px;min-height:0}
+.chip.row .e{font-size:32px}
+.chip.row span:last-child{display:flex;flex-direction:column}
+.sw{width:46px;height:46px;border-radius:50%;border:4px solid var(--paper);box-shadow:0 0 0 2px var(--line)}
+.world{min-height:110px;border-radius:18px;width:100%;display:grid;place-items:center;font-size:30px;letter-spacing:4px}
+.fontS{font-size:24px;line-height:1.6}
+label.q,.q{font-weight:800;font-size:18px}
+input[type=text],input[type=time],textarea{width:100%;font:inherit;color:var(--ink);background:var(--sky);border:3px solid var(--line);border-radius:18px;padding:12px 16px}
+textarea{min-height:90px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:var(--pink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.two>div{display:flex;flex-direction:column;gap:6px}
+.sugg{display:flex;flex-wrap:wrap;gap:8px}
+.sugg button{font:inherit;font-size:14px;font-weight:700;color:var(--ink);background:var(--sun-2);border:2px solid var(--sun);border-radius:99px;padding:5px 14px;cursor:pointer}
+.nav{display:flex;gap:10px;position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:3}
+.btn{font:inherit;font-weight:800;font-size:19px;border:0;border-radius:99px;padding:15px 24px;cursor:pointer;background:var(--pink);color:#3B1530;box-shadow:0 5px 0 #D8668C;flex:1;transition:transform .1s,box-shadow .1s}
 .btn:active{transform:translateY(4px);box-shadow:0 1px 0 #D8668C}
 .btn.ghost{background:var(--paper);color:var(--ink);border:3px solid var(--line);box-shadow:none;flex:0 0 auto}
 .btn.mint{background:var(--mint);color:#0F3B30;box-shadow:0 5px 0 #3BA88A}
-.btn:focus-visible,.chip:focus-visible{outline:4px solid var(--sun);outline-offset:3px}
-.bubble{background:var(--sun-2);border-radius:22px;padding:14px 18px;position:relative;font-weight:600}
-.bubble::after{content:"";position:absolute;bottom:-12px;inset-inline-start:34px;border:12px solid transparent;border-top-color:var(--sun-2);border-bottom:0}
-.note{background:var(--mint-2);border-radius:18px;padding:12px 16px;font-size:14px;line-height:1.8}
-.letter{background:var(--sky);border:3px dashed var(--line);border-radius:20px;padding:16px;white-space:pre-wrap;font-size:15px;line-height:2}
-.toast{font-size:14px;font-weight:800;color:var(--mint);min-height:1.5em;text-align:center}
-#confetti{position:fixed;inset:0;pointer-events:none;z-index:9}
-@media (max-width:380px){.grid{grid-template-columns:repeat(2,1fr)} h1{font-size:38px}}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:4px solid var(--sun);outline-offset:3px}
+.bubble{background:var(--sun-2);border-radius:22px;padding:14px 18px;font-weight:600}
+.note{background:var(--mint-2);border-radius:18px;padding:12px 16px;font-size:14.5px;line-height:1.85}
+.letter{background:var(--sky);border:3px dashed var(--line);border-radius:20px;padding:16px;white-space:pre-wrap;font-size:15px;line-height:2;max-height:420px;overflow:auto}
+.toast{font-size:15px;font-weight:800;color:var(--mint);min-height:1.5em;text-align:center}
+.cover{display:grid;place-items:center;font-size:96px;line-height:1;padding-block:8px}
+.count{font-size:13px;font-weight:800;color:var(--soft)}
+/* پیش‌نمایش */
+.side{display:flex;flex-direction:column;gap:8px}
+.side .cap{font-size:13px;font-weight:800;color:var(--soft);text-align:center}
+.pv{--a:#FF8FB1;--b:#FFC93C;--r:24px;--pf:"Lalezar";--bg:linear-gradient(#FFF3E4,#FFE0EA);--fg:#3B2A4F;--card:rgba(255,255,255,.82);
+  background:var(--bg);color:var(--fg);border-radius:34px;border:6px solid var(--ink);padding:16px 14px 18px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:10px;min-height:440px;transition:background .4s}
+.pv .deco{position:absolute;inset:0;pointer-events:none;font-size:26px;opacity:.55}
+.pv .deco span{position:absolute}
+.pv .ttl{font-family:var(--pf),"Vazirmatn",sans-serif;font-size:26px;line-height:1.3;color:var(--fg);position:relative;text-align:center;text-wrap:balance}
+.pv .buddy{display:flex;align-items:center;gap:8px;position:relative}
+.pv .buddy .bE{font-size:52px;line-height:1;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.pv .buddy .bB{background:var(--card);border-radius:16px;padding:8px 12px;font-size:14px;font-weight:700;color:#3B2A4F;flex:1}
+.pv .row{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:var(--r);padding:8px 12px;font-size:15px;font-weight:700;color:#3B2A4F;border-inline-start:6px solid var(--a);position:relative}
+.pv .row .ck{margin-inline-start:auto;width:24px;height:24px;border-radius:calc(var(--r)/2.4);border:3px solid var(--a)}
+.pv .row.done .ck{background:var(--a)}
+.pv .tags{display:flex;flex-wrap:wrap;gap:6px;position:relative}
+.pv .tags span{background:var(--b);color:#2B1B10;font-size:12.5px;font-weight:800;border-radius:99px;padding:2px 10px}
+.pv .me{position:absolute;bottom:10px;inset-inline-start:12px;font-size:34px}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:9}
+@media (max-width:859px){.pv{min-height:0}.pv .rows{display:none}.side{order:-1}.pv .tags{display:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-
 </head>
 <body>
-<canvas id="confetti"></canvas>
-<main class="book">
-  <div class="top">
-    <div class="stars" id="stars" aria-hidden="true"></div>
-    <span class="who" id="who">قصه</span>
-  </div>
-  <section class="page" id="page" aria-live="polite"></section>
-</main>
+<canvas id="fx"></canvas>
+<div class="wrap">
+  <main class="main">
+    <div class="bar"><div class="prog" aria-hidden="true"><i id="prog"></i></div><span class="who" id="who"></span></div>
+    <section class="card" id="card" aria-live="polite"></section>
+    <div class="nav" id="nav"></div>
+  </main>
+  <aside class="side" id="side" aria-label="پیش‌نمایشِ برنامه"></aside>
+</div>
 
 <script>
-const SVG = {
-  cover:`<svg viewBox="0 0 300 190" aria-hidden="true"><ellipse cx="150" cy="176" rx="120" ry="10" fill="var(--line)"/>
-    <rect x="80" y="70" width="140" height="100" rx="14" fill="var(--pink)"/><rect x="140" y="70" width="20" height="100" fill="var(--sun)"/>
-    <rect x="70" y="52" width="160" height="30" rx="10" fill="#FFA8C5"/><rect x="140" y="52" width="20" height="30" fill="var(--sun)"/>
-    <path d="M150 52c-30-40-62-10-36 0zM150 52c30-40 62-10 36 0z" fill="var(--sun)"/>
-    <circle cx="44" cy="40" r="6" fill="var(--sun)"/><circle cx="262" cy="30" r="8" fill="var(--mint)"/><circle cx="250" cy="120" r="5" fill="var(--pink)"/><circle cx="38" cy="130" r="7" fill="var(--mint)"/></svg>`,
-  home:`<svg viewBox="0 0 300 190" aria-hidden="true"><circle cx="250" cy="40" r="24" fill="var(--sun)"/>
-    <path d="M60 90 140 30 220 90z" fill="var(--pink)"/><rect x="74" y="88" width="132" height="86" rx="6" fill="var(--sun-2)" stroke="var(--line)" stroke-width="3"/>
-    <rect x="124" y="122" width="32" height="52" rx="6" fill="var(--mint)"/><rect x="88" y="104" width="26" height="26" rx="5" fill="#9FD8F5"/><rect x="166" y="104" width="26" height="26" rx="5" fill="#9FD8F5"/>
-    <circle cx="246" cy="150" r="14" fill="#FFB36B"/><rect x="236" y="164" width="20" height="16" rx="6" fill="var(--pink)"/>
-    <circle cx="272" cy="140" r="17" fill="#FFB36B"/><rect x="258" y="157" width="28" height="23" rx="8" fill="var(--mint)"/></svg>`,
-  phone:`<svg viewBox="0 0 300 190" aria-hidden="true"><rect x="106" y="14" width="88" height="164" rx="18" fill="var(--ink)"/><rect x="114" y="28" width="72" height="136" rx="10" fill="var(--sky)"/>
-    <circle cx="150" cy="70" r="20" fill="var(--pink-2)" stroke="var(--pink)" stroke-width="3"/><rect x="126" y="100" width="48" height="8" rx="4" fill="var(--line)"/><rect x="132" y="114" width="36" height="8" rx="4" fill="var(--line)"/>
-    <path d="M60 60c-14-16-36 2-18 18l18 16 18-16c18-16-4-34-18-18z" fill="var(--pink)"/><path d="M240 100c-10-12-27 1-13 13l13 12 13-12c14-12-3-25-13-13z" fill="var(--sun)"/>
-    <circle cx="232" cy="40" r="6" fill="var(--mint)"/><circle cx="64" cy="140" r="7" fill="var(--sun)"/></svg>`,
-  wand:`<svg viewBox="0 0 300 190" aria-hidden="true"><rect x="70" y="120" width="140" height="14" rx="7" transform="rotate(-30 140 127)" fill="var(--ink)"/>
-    <path d="M214 40l10 22 24 3-18 16 5 24-21-12-21 12 5-24-18-16 24-3z" fill="var(--sun)"/>
-    <circle cx="90" cy="50" r="6" fill="var(--pink)"/><circle cx="262" cy="130" r="8" fill="var(--mint)"/><circle cx="170" cy="20" r="5" fill="var(--pink)"/><circle cx="270" cy="30" r="4" fill="var(--mint)"/></svg>`
+/* ===================== گزینه‌ها ===================== */
+const COLORS=[["صورتی","#FF8FB1"],["بنفش","#A77BFF"],["یاسی","#C9A7F5"],["آبی","#4FAEF0"],["فیروزه‌ای","#2EC4C9"],["سبز","#5CCB7A"],
+  ["زرد","#FFC93C"],["نارنجی","#FF8A3D"],["قرمز","#FF5A5F"],["طلایی","#E0B03A"],["سرمه‌ای","#3B4A9A"],["نقره‌ای","#AEB6C4"]];
+const WORLDS={
+  stars:["آسمانِ ستاره‌ای","linear-gradient(160deg,#2B2257,#5B4B9A)","#FFFFFF",["✨","⭐","🌙","✨"]],
+  sea:["دریا","linear-gradient(170deg,#D6F3FF,#7CCDF2)","#173B57",["🐠","🐚","🫧","🐙"]],
+  garden:["باغِ گل","linear-gradient(170deg,#F4FFE9,#C5F0B4)","#2F4A22",["🌸","🌷","🦋","🌼"]],
+  forest:["جنگل","linear-gradient(170deg,#E6F7EA,#94D6A9)","#1F3D2A",["🌳","🍄","🦔","🍃"]],
+  space:["فضا","linear-gradient(160deg,#0F1A3A,#33459A)","#FFFFFF",["🚀","🪐","👽","⭐"]],
+  snow:["کوهستانِ برفی","linear-gradient(170deg,#F4FAFF,#CBE5FA)","#23405E",["❄️","⛄","🏔️","❄️"]],
+  candy:["شهرِ شیرینی","linear-gradient(170deg,#FFF0F7,#FFC6E0)","#5A2341",["🍭","🧁","🍬","🍩"]],
+  rainbow:["رنگین‌کمان","linear-gradient(170deg,#FFE3E3,#FFF4C9 35%,#DDF7E4 65%,#DDEBFF)","#3B2A4F",["🌈","☁️","⭐","☁️"]],
+  castle:["قلعهٔ پرنسس","linear-gradient(170deg,#FBF0FF,#E3C7FF)","#45246B",["🏰","👑","💎","✨"]],
+  farm:["مزرعه","linear-gradient(170deg,#FFF8DA,#FFE18F)","#4A3510",["🐄","🌻","🐔","🌾"]],
+  jungle:["جنگلِ گرمسیری","linear-gradient(170deg,#E4FFE9,#6FD08C)","#123B22",["🦜","🌴","🐒","🌺"]],
+  dino:["سرزمینِ دایناسورها","linear-gradient(170deg,#FFF1DE,#F6C68B)","#4A2A10",["🦕","🌋","🦖","🌿"]]
 };
-
-const COLORS=[["صورتی","#FF8FB1"],["بنفش","#B48CFF"],["آبی","#5AB8F5"],["سبز","#5CCFB0"],["زرد","#FFC93C"],["قرمز","#FF5A5F"]];
-const ANIMALS=[["🐰","خرگوش"],["🐱","گربه"],["🐶","سگ"],["🦄","اسب‌شاخدار"],["🐼","پاندا"],["🦋","پروانه"],["🐻","خرس"],["🐠","ماهی"],["🦁","شیر"]];
-const GIFTS=[["🧸","عروسک"],["🎨","وسیلهٔ نقاشی"],["🧱","لگو و ساختنی"],["📚","کتابِ قصه"],["👗","لباس"],["🎀","گل‌سر و تل"],["🧩","پازل و بازی"],["🎒","کوله و جامدادی"],["💍","دستبند و انگشتر"],["🎤","وسیلهٔ موسیقی"],["⚽","توپ و بازیِ بیرون"],["✨","سورپرایز!"]];
-const FUN=[["💃","رقصیدن"],["🎨","نقاشی"],["📖","قصه"],["🎶","آواز"],["🏃‍♀️","دویدن و بازی"],["🍳","آشپزی"]];
-const MOM_NO=[["🍬","خوراکی و شکلات"],["🔊","اسباب‌بازیِ پرسروصدا"],["🔩","چیزِ ریز (برای بچهٔ کوچک‌تر)"],["📱","گوشی و تبلت"],["💄","لوازمِ آرایش"]];
-
-const KEY="kado-v1";
-let S={name:"",color:[],animal:[],gift:[],fun:[],wish:"",age:"",size:"",no:[],momMsg:""};
-try{const v=JSON.parse(localStorage.getItem(KEY)||"null"); if(v) S={...S,...v};}catch(e){}
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
-
-const nm=()=>S.name.trim()||"دخترِ قصه";
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-
-const chips=(key,list,{multi=true,row=false}={})=>`<div class="grid ${row?"two":""}">${list.map(([e,t])=>`
-  <button type="button" class="chip ${row?"row":""}" data-k="${key}" data-v="${esc(t)}" data-m="${multi}" aria-pressed="${S[key].includes(t)}">
-  <span class="e">${e}</span><span>${t}</span></button>`).join("")}</div>`;
-const colorChips=()=>`<div class="grid">${COLORS.map(([t,h])=>`
-  <button type="button" class="chip" data-k="color" data-v="${t}" data-m="true" aria-pressed="${S.color.includes(t)}">
-  <span class="swatch" style="background:${h}"></span><span>${t}</span></button>`).join("")}</div>`;
-
-const PAGES=[
- {who:"قصه",cls:"",html:()=>`
-   <div class="art">${SVG.cover}</div>
-   <h1>کادوی جادویی</h1>
-   <p class="lead">یه قصهٔ کوچولو برای مامان و دخترِ قشنگش. مامان قصه رو بلند می‌خونه، دختر انتخاب می‌کنه.</p>
-   <label class="q" for="name">اسمِ دخترِ قصه چیه؟</label>
-   <input id="name" type="text" placeholder="مثلاً: نازنین" value="${esc(S.name)}" autocomplete="off">
-   <div class="nav"><button class="btn" data-go="1">قصه رو شروع کن</button></div>`},
- {who:"قصه",cls:"",html:()=>`
-   <div class="art">${SVG.home}</div>
-   <h2>یکی بود، یکی نبود…</h2>
-   <p class="lead">یه دخترِ کوچولوی مهربون بود به اسمِ <b>${esc(nm())}</b>. ${esc(nm())} با مامانش توی یه خونهٔ گرم و پرنور زندگی می‌کرد. مامانش هر شب براش قصه می‌گفت و ${esc(nm())} هم کلی چیزِ قشنگ دوست داشت.</p>`},
- {who:"قصه",cls:"",html:()=>`
-   <div class="art">${SVG.phone}</div>
-   <h2>یه دوستِ تازه</h2>
-   <p class="lead">یه روز مامان توی اینستاگرام با یه دوستِ خوب آشنا شد. مامان از دخترش تعریف کرد و دوستش خیلی خوشحال شد که یه دخترِ به این نازی هست.</p>`},
- {who:"قصه",cls:"",html:()=>`
-   <div class="art">${SVG.wand}</div>
-   <h2>کادو چی باشه؟</h2>
-   <div class="bubble">«من دلم می‌خواد برای ${esc(nm())} یه کادو بفرستم! ولی نمی‌دونم چی دوست داره…»</div>
-   <p class="lead">برای همین دوستِ مامان این دفترچهٔ جادویی رو درست کرد. حالا ${esc(nm())} خودش می‌گه چی دوست داره. هر جواب یه ستاره روشن می‌کنه!</p>`},
- {who:"نوبتِ "+"دختر",cls:"kid",html:()=>`
-   <h2>رنگِ محبوبت کدومه؟</h2><p class="muted">هر چندتا که دوست داری بزن.</p>${colorChips()}`},
- {who:"نوبتِ دختر",cls:"kid",html:()=>`
-   <h2>کدوم حیوون رو بیشتر دوست داری؟</h2>${chips("animal",ANIMALS)}`},
- {who:"نوبتِ دختر",cls:"kid",html:()=>`
-   <h2>دوست داری کادوت چی باشه؟</h2><p class="muted">می‌تونی چندتا انتخاب کنی.</p>${chips("gift",GIFTS)}`},
- {who:"نوبتِ دختر",cls:"kid",html:()=>`
-   <h2>بیشتر از همه عاشقِ چی هستی؟</h2>${chips("fun",FUN)}`},
- {who:"نوبتِ دختر",cls:"kid",html:()=>`
-   <h2>یه آرزوی بزرگ!</h2>
-   <p class="lead">اگه یه چیز رو بتونی همین الان داشته باشی، اون چیه؟ بگو تا مامان برات بنویسه.</p>
-   <label class="q" for="wish">آرزوی ${esc(nm())}</label>
-   <textarea id="wish" placeholder="مثلاً: یه عروسکِ خرگوشی که گوش‌های بلند داره">${esc(S.wish)}</textarea>`},
- {who:"نوبتِ مامان",cls:"mom",html:()=>`
-   <h2>حالا نوبتِ مامانه</h2>
-   <p class="lead">چندتا سؤالِ کوچیک تا کادو درست انتخاب بشه.</p>
-   <label class="q" for="age">${esc(nm())} چند سالشه؟</label>
-   <input id="age" type="text" inputmode="numeric" placeholder="مثلاً: ۶ سال" value="${esc(S.age)}">
-   <label class="q" for="size">سایزِ لباس (اگه لباس هم خوبه)</label>
-   <input id="size" type="text" placeholder="مثلاً: ۶ تا ۷ سال" value="${esc(S.size)}">
-   <p class="q">چیزی که مناسب نیست؟</p>${chips("no",MOM_NO,{row:true})}`},
- {who:"نوبتِ مامان",cls:"mom",html:()=>`
-   <h2>یه پیام به دوستت</h2>
-   <label class="q" for="momMsg">جوابِ مامان</label>
-   <textarea id="momMsg" placeholder="مثلاً: ممنون که به فکرِ دخترم بودی، خیلی ذوق کرد!">${esc(S.momMsg)}</textarea>
-   <div class="note">این دفترچه هیچ‌چیزی رو خودش جایی نمی‌فرسته. صفحهٔ بعد متن آماده می‌شه و خودت، اگه خواستی، برای دوستت می‌فرستی. آدرس، مدرسه یا عکس لازم نیست.</div>`},
- {who:"پایانِ قصه",cls:"",html:()=>`
-   <h2>و این‌طوری دوستِ مامان فهمید ${esc(nm())} چی دوست داره!</h2>
-   <p class="lead">آفرین ${esc(nm())}! همهٔ ستاره‌ها روشن شد. قصهٔ ما به سر رسید، کادو هم به‌زودی می‌رسه.</p>
-   <div class="letter" id="letter">${esc(letter())}</div>
-   <div class="nav"><button class="btn mint" id="copy">کپیِ متن برای فرستادن</button></div>
-   <p class="toast" id="toast" role="status"></p>
-   <button class="btn ghost" id="again">از اول</button>`}
+const BUDDIES=[["🐰","خرگوش"],["🐱","گربه"],["🐶","سگ"],["🦄","اسب‌شاخدار"],["🐼","پاندا"],["🦊","روباه"],["🦖","دایناسور"],["🐧","پنگوئن"],
+  ["🦉","جغد"],["🐻","خرس"],["🐨","کوالا"],["🐹","همستر"],["🧜‍♀️","پری دریایی"],["🧚‍♀️","پری"],["🤖","ربات"],["🐉","اژدهای کوچولو"],["🦋","پروانه"],["🐢","لاک‌پشت"]];
+const ME=[["👧","دختر کوچولو"],["👸","پرنسس"],["🧚‍♀️","پری"],["🦸‍♀️","قهرمان"],["🧜‍♀️","پری دریایی"],["👩‍🚀","فضانورد"],["👩‍🎨","نقاش"],["👩‍🔬","دانشمند"],["🧙‍♀️","جادوگرِ مهربون"],["👩‍🍳","آشپز"],["💃","رقصنده"],["👩‍🏫","معلم"]];
+const FONTS=[["Lalezar","پررنگ و قلمبه"],["Baloo Bhaijaan 2","گرد و شاد"],["Lemonada","بازیگوش"],["Vazirmatn","ساده و مرتب"]];
+const SHAPES=[["28","گرد و نرم","⚪"],["14","کمی گرد","🔵"],["6","مربعیِ مرتب","🟦"]];
+const MODES=[["روز","☀️","همیشه روشن"],["شب","🌙","همیشه تاریک"],["خودکار","🌗","روز روشن، شب تاریک"]];
+const SOUNDS=[["piano","پیانو","🎹"],["bell","زنگوله","🔔"],["bird","پرنده","🐦"],["bubble","حباب","🫧"],["drum","طبل","🥁"],["magic","جادو","🪄"],["none","بی‌صدا","🔇"]];
+const FEATURES=[
+ ["tasks","✅","کارهای روزانه","فهرستِ کارهای صبح، عصر و شب"],
+ ["story","📖","قصهٔ شب","هر شب یه فصلِ تازه"],
+ ["stars","⭐","ستاره جمع کردن","برای هر کار یه ستاره"],
+ ["rewards","🎁","جایزه","با ستاره‌ها جایزه بگیرم"],
+ ["timer","⏳","ساعتِ رنگی","می‌بینم چقدر وقت مونده"],
+ ["mood","😊","حالم چطوره؟","هر روز بگم چه حسی دارم"],
+ ["water","💧","آب خوردن","یادم بندازه آب بخورم"],
+ ["diary","📔","دفترِ خاطره","چیزهای قشنگِ امروز"],
+ ["draw","🖍️","نقاشی","یه صفحه برای نقاشی"],
+ ["pet","🐣","حیوونِ من","یه دوست که با کارهام بزرگ می‌شه"],
+ ["garden","🌱","باغچهٔ من","با هر کار یه گل سبز می‌شه"],
+ ["calendar","📅","تقویم","تولد، مهمونی، روزهای مهم"],
+ ["week","🗓️","برنامهٔ هفته","هر روزِ هفته چی دارم"],
+ ["school","🎒","کیفِ مدرسه","چی باید ببرم؟ مشق چی دارم؟"],
+ ["reading","📚","کتاب‌هایی که خوندم","یه قفسهٔ کتاب پر کنم"],
+ ["wishes","🌠","فهرستِ آرزو","چیزهایی که دلم می‌خواد"],
+ ["practice","🎻","تمرین","ساز، ورزش، زبان…"],
+ ["sport","🤸‍♀️","ورزش و حرکت","حرکت‌های بامزه"],
+ ["mom","💌","پیام از مامان","مامان برام پیام بذاره"],
+ ["kind","💖","کارِ مهربونی","هر روز یه کارِ خوب برای یکی"],
+ ["stickers","🏷️","آلبومِ استیکر","استیکر جمع کنم"],
+ ["breath","🫧","آروم شدن","وقتی ناراحتم نفسِ عمیق"],
+ ["dress","👗","لباس برای دوستم","با ستاره‌ها براش لباس بخرم"],
+ ["photo","📷","عکسِ روزم","یه عکس از کارِ امروزم"]
 ];
-const STORY_END=3, LAST=PAGES.length-1;
+const REWARDS=[["🏷️","استیکرِ تازه"],["👗","لباسِ تازه برای دوستم"],["📖","یه قصهٔ تازه"],["🎵","یه آهنگِ تازه"],["🎨","رنگ و تمِ تازه"],
+  ["🍦","یه خوراکیِ خوشمزه با مامان"],["🎮","وقتِ بازی"],["🌳","رفتن به پارک"],["🎁","یه کادوی کوچولو"],["🤗","بغل و بوسِ مامان"]];
+const PARTY=[["🎉","کاغذِ رنگی"],["💃","دوستم برقصه"],["🎆","آتش‌بازی"],["⭐","بارونِ ستاره"],["🎵","آهنگِ شاد"],["🫧","حباب"]];
+const REMIND=[["🗣️","دوستم صدام کنه"],["🎵","یه آهنگِ کوچولو"],["✨","یه ستاره چشمک بزنه"],["📳","بلرزه"],["🤫","آروم، بی‌صدا"]];
+const TASKS={
+ "صبح":[["🪥","مسواک"],["🛏️","مرتب کردنِ رختخواب"],["🥣","صبحانه"],["👕","لباس پوشیدن"],["💇‍♀️","شونه کردنِ مو"],["🎒","آماده کردنِ کیف"]],
+ "عصر":[["✏️","مشق"],["📚","کتاب خوندن"],["🎹","تمرینِ ساز"],["🧸","جمع کردنِ اسباب‌بازی"],["🤸‍♀️","ورزش"],["🪴","آب دادن به گل"],["🐟","غذا دادن به حیوون"],["🍽️","کمک به مامان"]],
+ "شب":[["🛁","حموم"],["🪥","مسواکِ شب"],["👚","لباسِ خواب"],["📖","قصه"],["🎒","کیفِ فردا"],["🌙","خوابیدن سرِ وقت"]]
+};
+const LOVES=[["👑","پرنسس‌ها"],["🦄","جادو"],["🐾","حیوون‌ها"],["🌊","دریا"],["🚀","فضا"],["🦖","دایناسور"],["🎨","نقاشی"],["💃","رقص"],["🎵","آهنگ"],
+  ["⚽","فوتبال"],["🍰","آشپزی"],["📚","کتاب"],["🌸","گل‌ها"],["🧩","پازل"],["🎭","نمایش"],["🔬","آزمایش"]];
+const STORIES=[["🪄","جادویی"],["🗺️","ماجراجویی"],["🐾","حیوون‌ها"],["😂","خنده‌دار"],["👑","پرنسسی"],["🚀","فضایی"],["🌊","زیرِ دریا"],["😴","آروم و خواب‌آور"]];
+const TITLES=["قهرمان","پرنسس","خانم کوچولو","عزیزم","ستاره","گلم"];
 
+/* ===================== داده ===================== */
+const KEY="kado-v2", TOPIC="kado-607d1079321a";
+const fresh=()=>({name:"",app:"",buddy:"",buddyName:"",me:"",title:"",color:"",color2:"",world:"",font:"",shape:"",mode:"",sound:"",
+  features:[],top:[],rewards:[],party:[],remind:[],tasks:[],taskMore:"",loves:[],stories:[],wish:"",
+  age:"",grade:"",wake:"",school:"",back:"",sleep:"",momMust:"",momNo:"",momMsg:""});
+let S=fresh(); try{const v=JSON.parse(localStorage.getItem(KEY)||"null"); if(v) S={...S,...v}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nm=()=>S.name.trim()||"دخترِ قصه";
+const colorHex=n=>(COLORS.find(c=>c[0]===n)||[,""])[1];
+
+/* ===================== کمک‌ساز ===================== */
+function pick(key,list,{multi=false,max=0,cls="",fn}={}){
+  return `<div class="grid ${cls}">${list.map(it=>{const v=it.v??it[1];const on=multi?S[key].includes(v):S[key]===v;
+    return `<button type="button" class="chip ${it.row?"row":""}" data-k="${key}" data-v="${esc(v)}" data-m="${multi?1:0}" data-max="${max}" aria-pressed="${on}">${fn?fn(it):`<span class="e">${it[0]}</span><span>${esc(it[1])}</span>`}</button>`}).join("")}</div>`;
+}
+const txt=(id,label,ph,{area=false,type="text"}={})=>`<div><label class="q" for="${id}">${label}</label>${area?`<textarea id="${id}" placeholder="${esc(ph)}">${esc(S[id])}</textarea>`:`<input id="${id}" type="${type}" placeholder="${esc(ph)}" value="${esc(S[id])}" autocomplete="off">`}</div>`;
+const sugg=(id,list)=>`<div class="sugg">${list.map(s=>`<button type="button" data-fill="${id}" data-val="${esc(s)}">${esc(s)}</button>`).join("")}</div>`;
+
+/* ===================== قدم‌ها ===================== */
+const STEPS=[
+ {who:"قصه",h:()=>`<div class="cover" aria-hidden="true">🎁</div><p class="muted" style="text-align:center;font-weight:800">یه کادو از طرفِ یه دوست</p><h1>کادوی جادویی</h1>
+   <p class="lead">یکی بود، یکی نبود. مامانِ یه دخترِ مهربون توی اینستاگرام با یه دوستِ خوب آشنا شد. دوستِ مامان گفت: «می‌خوام برای دخترت یه برنامهٔ مخصوص بسازم، یه دفترچهٔ جادویی که کارهاش رو باهاش بکنه. ولی فقط به سلیقهٔ خودش!»</p>
+   <p class="lead">برای همین این کادو رو فرستاد. اینجا <b>تو</b> همه‌چیز رو انتخاب می‌کنی: اسم، رنگ، دوستت، دنیات، صداها و کلی چیزِ دیگه. سمتِ دیگه هم می‌بینی برنامه‌ات چه شکلی می‌شه!</p>
+   ${txt("name","اسمِ تو چیه؟","مثلاً: نازنین")}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>اسمِ برنامه‌ات چی باشه؟</h2><p class="muted">یکی رو بزن یا خودت یه اسم بگو تا مامان بنویسه.</p>
+   ${sugg("app",[`دفترچهٔ جادوییِ ${nm()}`,`روزهای قشنگِ ${nm()}`,"باغِ ستاره‌ها","قصرِ من","سفرِ من","دنیای رنگی"])}${txt("app","اسمِ برنامه","یه اسمِ قشنگ…")}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>دوستِ همراهت کیه؟</h2><p class="muted">این دوست همیشه توی برنامه‌ات هست، باهات حرف می‌زنه و تشویقت می‌کنه.</p>${pick("buddy",BUDDIES)}
+   ${txt("buddyName","اسمِ دوستت چی باشه؟","مثلاً: پنبه")}${sugg("buddyName",["پنبه","فندق","ستاره","پشمک","کوکو","نارنگی","گلی","بیسکوییت"])}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>خودت توی برنامه چه شکلی باشی؟</h2>${pick("me",ME)}
+   <p class="q">دوستت تو رو چی صدا کنه؟</p>${sugg("title",[nm(),...TITLES])}${txt("title","لقبِ تو","مثلاً: قهرمان")}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>رنگِ اصلیِ برنامه‌ات؟</h2>${pick("color",COLORS.map(c=>({v:c[0],c})),{fn:it=>`<span class="sw" style="background:${it.c[1]}"></span><span>${it.c[0]}</span>`})}
+   <h2 style="font-size:24px">یه رنگِ دوم هم انتخاب کن</h2>${pick("color2",COLORS.map(c=>({v:c[0],c})),{fn:it=>`<span class="sw" style="background:${it.c[1]}"></span><span>${it.c[0]}</span>`})}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>برنامه‌ات توی کدوم دنیا باشه؟</h2>${pick("world",Object.entries(WORLDS).map(([k,w])=>({v:k,w})),{cls:"big",fn:it=>`<span class="world" style="background:${it.w[1]};color:${it.w[2]}">${it.w[3].slice(0,3).join("")}</span><span>${it.w[0]}</span>`})}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>کدوم خط رو دوست داری؟</h2>${pick("font",FONTS.map(f=>({v:f[0],f})),{cls:"wide",fn:it=>`<span class="fontS" style="font-family:'${it.f[0]}',Vazirmatn">سلام ${esc(nm())}!</span><small>${it.f[1]}</small>`})}
+   <h2 style="font-size:24px">دکمه‌ها چه شکلی باشن؟</h2>${pick("shape",SHAPES.map(s=>({v:s[0],s})),{fn:it=>`<span style="width:60px;height:40px;background:${colorHex(S.color)||"var(--pink)"};border-radius:${Math.min(+it.s[0],20)}px"></span><span>${it.s[1]}</span>`})}
+   <h2 style="font-size:24px">روز یا شب؟</h2>${pick("mode",MODES.map(m=>({v:m[0],m})),{fn:it=>`<span class="e">${it.m[1]}</span><span>${it.m[0]}</span><small>${it.m[2]}</small>`})}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>وقتی یه کار رو تموم می‌کنی چه صدایی بیاد؟</h2><p class="muted">بزن تا صداش رو بشنوی.</p>
+   ${pick("sound",SOUNDS.map(s=>({v:s[0],s})),{fn:it=>`<span class="e">${it.s[2]}</span><span>${it.s[1]}</span>`})}
+   <h2 style="font-size:24px">وقتی همهٔ کارهای روز تموم شد، چه جشنی بگیریم؟</h2>${pick("party",PARTY,{multi:true})}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>توی برنامه‌ات چی می‌خوای باشه؟</h2><p class="muted">هر چندتا که دوست داری بزن. <span class="count">${S.features.length} تا انتخاب کردی</span></p>
+   ${pick("features",FEATURES.map(f=>({v:f[0],f,row:1})),{multi:true,cls:"wide",fn:it=>`<span class="e">${it.f[1]}</span><span><b>${it.f[2]}</b><small>${it.f[3]}</small></span>`})}`},
+ {who:"نوبتِ تو",kid:1,h:()=>{const mine=FEATURES.filter(f=>S.features.includes(f[0]));
+   return `<h2>از این‌ها کدوم ۳ تا رو از همه بیشتر دوست داری؟</h2><p class="muted">این سه‌تا رو اول برات می‌سازیم. <span class="count">${S.top.length} از ۳</span></p>
+   ${mine.length?pick("top",mine.map(f=>({v:f[0],f,row:1})),{multi:true,max:3,cls:"wide",fn:it=>`<span class="e">${it.f[1]}</span><span><b>${it.f[2]}</b></span>`}):`<p class="bubble">اول توی صفحهٔ قبل چندتا چیز انتخاب کن.</p>`}`}},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>چه کارهایی می‌خوای هر روز انجام بدی؟</h2>
+   ${Object.entries(TASKS).map(([p,l])=>`<p class="q">${p==="صبح"?"☀️":p==="عصر"?"🌤️":"🌙"} ${p}</p>${pick("tasks",l.map(t=>({v:p+": "+t[1],t})),{multi:true,fn:it=>`<span class="e">${it.t[0]}</span><span>${it.t[1]}</span>`})}`).join("")}
+   ${txt("taskMore","کارِ دیگه‌ای هم هست؟","مثلاً: تمرینِ نقاشی، کلاسِ شنا",{area:true})}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>دوست داری جایزه‌ات چی باشه؟</h2>${pick("rewards",REWARDS,{multi:true,cls:"big"})}
+   <h2 style="font-size:24px">وقتِ یه کار که رسید، چطوری یادت بندازیم؟</h2>${pick("remind",REMIND,{multi:true})}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>عاشقِ چی هستی؟</h2><p class="muted">از این‌ها برای استیکرها و قصه‌هات استفاده می‌کنیم.</p>${pick("loves",LOVES,{multi:true})}
+   <h2 style="font-size:24px">قصه‌هات چه جوری باشن؟</h2>${pick("stories",STORIES,{multi:true})}`},
+ {who:"نوبتِ تو",kid:1,h:()=>`<h2>یه آرزوی بزرگ!</h2><p class="lead">دیگه دوست داری برنامه‌ات چی داشته باشه؟ هر چیزی! بگو تا مامان بنویسه.</p>
+   ${txt("wish","آرزوی "+esc(nm()),"مثلاً: دوستم هر روز صبح برام یه جوک بگه",{area:true})}`},
+ {who:"نوبتِ مامان",mom:1,h:()=>`<h2>حالا نوبتِ مامانه</h2><p class="lead">برای اینکه برنامه درست با روزِ ${esc(nm())} جور بشه:</p>
+   <div class="two">${txt("age","سن","مثلاً: ۷ سال")}${txt("grade","کلاس","مثلاً: اول دبستان")}
+   ${txt("wake","ساعتِ بیدار شدن","",{type:"time"})}${txt("school","رفتن به مدرسه","",{type:"time"})}
+   ${txt("back","برگشتن از مدرسه","",{type:"time"})}${txt("sleep","ساعتِ خواب","",{type:"time"})}</div>`},
+ {who:"نوبتِ مامان",mom:1,h:()=>`<h2>چیزهایی که مامان می‌خواد</h2>
+   ${txt("momMust","کارهایی که حتماً باید توی برنامه باشه","مثلاً: مشق قبل از بازی، دو بار مسواک",{area:true})}
+   ${txt("momNo","چیزهایی که نباید باشه یا حساسیت داره","مثلاً: جایزهٔ خوراکی نه",{area:true})}
+   ${txt("momMsg","یه پیام برای دوستت","مثلاً: ممنون، خیلی ذوق کرد!",{area:true})}
+   <div class="note">این صفحه چیزی رو خودش جایی نمی‌فرسته. صفحهٔ بعد یه نامه آماده می‌شه. اگه خواستی کپی‌اش کن و توی دایرکت بفرست. آدرس، مدرسه یا عکس لازم نیست.</div>`},
+ {who:"پایانِ قصه",end:1,h:()=>`<h2>آفرین ${esc(nm())}! برنامه‌ات طراحی شد 🎉</h2>
+   <p class="lead">و این‌طوری دوستِ مامان فهمید ${esc(nm())} دقیقاً چی دوست داره. حالا می‌ره و برنامه‌ات رو همین‌شکلی می‌سازه. قصهٔ ما به سر رسید!</p>
+   <div class="letter" id="letter">${esc(letter())}</div>
+   <button class="btn" id="send">💌 بفرست برای دوستمون</button><p class="toast" id="toast" role="status"></p>
+   <button class="btn ghost" id="copy">یا کپیِ نامه برای دایرکت</button>
+   <p class="muted">با زدنِ «بفرست» همین نامه برای دوستِ مامان فرستاده می‌شه، نه هیچ‌جای دیگه.</p>`}
+];
+const LAST=STEPS.length-1;
+
+/* ===================== نامه ===================== */
 function letter(){
-  const L=(a)=>a.length?a.join("، "):"—";
-  return `سلام! من ${nm()} هستم 🌸
-رنگِ محبوبم: ${L(S.color)}
-حیوونِ محبوبم: ${L(S.animal)}
-دوست دارم کادوم این باشه: ${L(S.gift)}
-عاشقِ: ${L(S.fun)}
+  const L=a=>a&&a.length?a.join("، "):"—", F=ids=>L(FEATURES.filter(f=>ids.includes(f[0])).map(f=>f[2]));
+  const B=BUDDIES.find(b=>b[0]===S.buddy), W=WORLDS[S.world], Fo=FONTS.find(f=>f[0]===S.font), Sh=SHAPES.find(s=>s[0]===S.shape), So=SOUNDS.find(s=>s[0]===S.sound);
+  const tasks=[...S.tasks,...(S.taskMore.trim()?["دیگر: "+S.taskMore.trim()]:[])];
+  return `سلام! من ${nm()} هستم و برنامه‌ام رو این‌طوری می‌خوام 🌸
+
+اسمِ برنامه: ${S.app.trim()||"—"}
+دوستِ همراه: ${B?B[1]+" "+B[0]:"—"}${S.buddyName.trim()?" به اسمِ «"+S.buddyName.trim()+"»":""}
+خودم: ${(ME.find(m=>m[0]===S.me)||[,"—"])[1]} — صدام کنه: ${S.title.trim()||"—"}
+رنگ‌ها: ${S.color||"—"} و ${S.color2||"—"}
+دنیا: ${W?W[0]:"—"}
+خط: ${Fo?Fo[1]:"—"} · دکمه‌ها: ${Sh?Sh[1]:"—"} · حالت: ${S.mode||"—"}
+صدای تمام شدنِ کار: ${So?So[1]:"—"}
+جشنِ آخرِ روز: ${L(S.party)}
+
+امکاناتی که می‌خوام: ${F(S.features)}
+سه‌تا از همه مهم‌تر: ${F(S.top)}
+کارهای هر روزم: ${L(tasks)}
+جایزه‌ها: ${L(S.rewards)}
+یادآوری: ${L(S.remind)}
+عاشقِ: ${L(S.loves)}
+قصه‌ها: ${L(S.stories)}
 آرزوی بزرگم: ${S.wish.trim()||"—"}
 
-از طرفِ مامان:
-سن: ${S.age.trim()||"—"}${S.size.trim()?`\nسایزِ لباس: ${S.size.trim()}`:""}
-مناسب نیست: ${L(S.no)}
-${S.momMsg.trim()||""}`.trim();
+— از طرفِ مامان —
+سن: ${S.age||"—"} · کلاس: ${S.grade||"—"}
+بیدار شدن ${S.wake||"—"} · مدرسه ${S.school||"—"} · برگشت ${S.back||"—"} · خواب ${S.sleep||"—"}
+حتماً باشه: ${S.momMust.trim()||"—"}
+نباشه: ${S.momNo.trim()||"—"}
+${S.momMsg.trim()}`;
 }
 
-let cur=0;
-try{const c=+localStorage.getItem(KEY+"-p"); if(c>=0&&c<=LAST) cur=c;}catch(e){}
-const page=document.getElementById("page"), who=document.getElementById("who"), stars=document.getElementById("stars");
-const KID=[4,5,6,7,8,9,10]; // صفحه‌هایی که ستاره روشن می‌کنند
-stars.innerHTML=KID.map(()=>"<span></span>").join("");
-
-function render(){
-  const P=PAGES[cur];
-  who.textContent=P.who; who.className="who "+P.cls;
-  let nav="";
-  if(cur>0 && cur<LAST) nav=`<div class="nav"><button class="btn ghost" data-go="${cur-1}" aria-label="صفحهٔ قبل">قبلی</button><button class="btn ${P.cls==="mom"?"mint":""}" data-go="${cur+1}">${cur===STORY_END?"بریم انتخاب کنیم!":cur===LAST-1?"تمومه!":"بعدی"}</button></div>`;
-  page.innerHTML=P.html()+nav;
-  page.style.animation="none"; void page.offsetWidth; page.style.animation="";
-  [...stars.children].forEach((s,i)=>s.classList.toggle("on",cur>KID[i]));
-  try{localStorage.setItem(KEY+"-p",cur)}catch(e){}
-  if(cur===LAST) confetti();
-  window.scrollTo({top:0,behavior:"smooth"});
+/* ===================== پیش‌نمایش ===================== */
+const side=document.getElementById("side");
+function preview(){
+  const w=WORLDS[S.world]||["","linear-gradient(170deg,#FFF6EC,#FFE3EC)","#3B2A4F",["✨","🎀","⭐","🌸"]];
+  const dark=S.mode==="شب";
+  const bg=dark&&!["stars","space"].includes(S.world)?"linear-gradient(160deg,#1E1830,#3A2D5C)":w[1], fg=dark?"#FFFFFF":w[2];
+  const B=S.buddy||"🎁", t=S.title.trim()||nm();
+  const top=FEATURES.filter(f=>S.top.includes(f[0])).concat(FEATURES.filter(f=>S.features.includes(f[0])&&!S.top.includes(f[0]))).slice(0,6);
+  const rows=(S.tasks.length?S.tasks.slice(0,4):["صبح: مسواک","صبح: صبحانه","عصر: مشق"]).map((x,i)=>`<div class="row ${i===0?"done":""}">${esc(x.split(": ")[1]||x)}<span class="ck"></span></div>`).join("");
+  const pos=[[8,6],[78,10],[14,70],[82,64]];
+  side.innerHTML=`<p class="cap">برنامهٔ تو این شکلی می‌شه</p>
+  <div class="pv" style="--a:${colorHex(S.color)||"#FF8FB1"};--b:${colorHex(S.color2)||"#FFC93C"};--r:${S.shape||24}px;--pf:'${S.font||"Lalezar"}';--bg:${bg};--fg:${fg}">
+    <div class="deco" aria-hidden="true">${w[3].map((d,i)=>`<span style="right:${pos[i][0]}%;top:${pos[i][1]}%">${d}</span>`).join("")}</div>
+    <div class="ttl">${esc(S.app.trim()||"برنامهٔ "+nm())}</div>
+    <div class="buddy"><span class="bE" aria-hidden="true">${B}</span><span class="bB">${S.buddy?`سلام ${esc(t)}! منم ${esc(S.buddyName.trim()||"دوستت")}. بریم سراغِ کارها؟`:"دوستِ همراهت رو انتخاب کن!"}</span></div>
+    <div class="rows" style="display:flex;flex-direction:column;gap:8px;position:relative">${rows}</div>
+    <div class="tags">${top.map(f=>`<span>${f[1]} ${f[2]}</span>`).join("")}</div>
+    ${S.me?`<span class="me" aria-hidden="true">${S.me}</span>`:""}
+  </div>`;
 }
 
-page.addEventListener("input",e=>{const id=e.target.id; if(id in S){S[id]=e.target.value; save();}});
-page.addEventListener("click",e=>{
-  const c=e.target.closest(".chip");
-  if(c){const k=c.dataset.k,v=c.dataset.v; const i=S[k].indexOf(v);
-    i>=0?S[k].splice(i,1):S[k].push(v); c.setAttribute("aria-pressed",i<0); save(); if(i<0) sparkle(c); return;}
-  const g=e.target.closest("[data-go]"); if(g){cur=+g.dataset.go; render(); return;}
-  if(e.target.id==="copy"){
-    const txt=letter(), t=document.getElementById("toast");
-    navigator.clipboard?.writeText(txt).then(()=>t.textContent="کپی شد! حالا توی پیامِ اینستاگرام بچسبون.")
-      .catch(()=>{const r=document.createRange(); r.selectNodeContents(document.getElementById("letter"));
-        const s=getSelection(); s.removeAllRanges(); s.addRange(r); t.textContent="متن انتخاب شد؛ نگه دار و «کپی» رو بزن.";})
-      ?? (t.textContent="متن رو نگه دار و کپی کن.");
-  }
-  if(e.target.id==="again"){S={name:S.name,color:[],animal:[],gift:[],fun:[],wish:"",age:"",size:"",no:[],momMsg:""}; save(); cur=0; render();}
+/* ===================== نمایش ===================== */
+const card=document.getElementById("card"),nav=document.getElementById("nav"),who=document.getElementById("who"),prog=document.getElementById("prog");
+let cur=0; try{const c=+localStorage.getItem(KEY+"-p"); if(c>=0&&c<=LAST) cur=c}catch(e){}
+function render(scroll=true){
+  const P=STEPS[cur];
+  who.textContent=P.who; who.className="who "+(P.kid?"kid":P.mom?"mom":"");
+  card.innerHTML=P.h();
+  nav.innerHTML=cur===LAST?`<button class="btn ghost" data-go="${cur-1}">قبلی</button><button class="btn ghost" id="again">از اول</button>`
+    :`${cur?`<button class="btn ghost" data-go="${cur-1}">قبلی</button>`:""}<button class="btn ${P.mom?"mint":""}" data-go="${cur+1}">${cur===0?"بزن بریم!":cur===LAST-1?"تموم شد!":"بعدی"}</button>`;
+  prog.style.width=(cur/LAST*100)+"%";
+  card.style.animation="none"; void card.offsetWidth; card.style.animation="";
+  preview(); try{localStorage.setItem(KEY+"-p",cur)}catch(e){}
+  if(cur===LAST) party();
+  if(scroll) window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.addEventListener("input",e=>{const id=e.target.id; if(id in S&&typeof S[id]==="string"){S[id]=e.target.value; save(); preview()}});
+document.addEventListener("click",e=>{
+  const c=e.target.closest(".chip[data-k]");
+  if(c){const k=c.dataset.k,v=c.dataset.v;
+    if(c.dataset.m==="1"){const i=S[k].indexOf(v),max=+c.dataset.max;
+      if(i>=0) S[k].splice(i,1); else { if(max&&S[k].length>=max) S[k].shift(); S[k].push(v); spark(c)}
+      if(k==="features") S.top=S.top.filter(x=>S.features.includes(x));
+    } else { S[k]=S[k]===v?"":v; if(S[k]) spark(c) }
+    if(k==="sound"&&S.sound) play(S.sound);
+    save(); render(false); return}
+  const f=e.target.closest("[data-fill]");
+  if(f){S[f.dataset.fill]=f.dataset.val; save(); render(false); return}
+  const g=e.target.closest("[data-go]");
+  if(g){cur=+g.dataset.go; render(); return}
+  if(e.target.id==="copy"){const t=document.getElementById("toast"),body=letter();
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById("letter"));const s=getSelection();s.removeAllRanges();s.addRange(r);
+      try{document.execCommand("copy");t.textContent="کپی شد! حالا توی دایرکتِ اینستاگرام بچسبون."}catch(x){t.textContent="متن انتخاب شد؛ «کپی» رو بزن."}};
+    if(navigator.clipboard) navigator.clipboard.writeText(body).then(()=>t.textContent="کپی شد! حالا توی دایرکتِ اینستاگرام بچسبون.").catch(fallback); else fallback();
+    return}
+  if(e.target.id==="send"){const b=e.target,t=document.getElementById("toast");b.disabled=true;b.textContent="دارم می‌فرستم…";
+    fetch("https://ntfy.sh/",{method:"POST",body:JSON.stringify({topic:TOPIC,title:"کادو: سلیقهٔ "+nm(),message:letter().slice(0,1900),tags:["gift"]})})
+      .then(r=>{if(!r.ok) throw 0; b.textContent="فرستاده شد! 💌"; t.textContent="رسید! دوستمون به‌زودی برنامه رو می‌سازه."; S.sent=Date.now(); save(); party()})
+      .catch(()=>{b.disabled=false;b.textContent="💌 دوباره بفرست";t.textContent="فرستاده نشد. اینترنت رو بسنج و دوباره بزن، یا نامه رو کپی کن.";});
+    return}
+  if(e.target.id==="again"){const keep=S.name; S=fresh(); S.name=keep; save(); cur=0; render()}
 });
 
-const cv=document.getElementById("confetti"), cx=cv.getContext("2d");
-const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-function burst(x,y,n,spread){
-  if(reduce) return;
-  cv.width=innerWidth; cv.height=innerHeight;
-  const cols=["#FF8FB1","#FFC93C","#5CCFB0","#B48CFF","#5AB8F5"];
-  const ps=Array.from({length:n},()=>({x,y,vx:(Math.random()-.5)*spread,vy:-Math.random()*spread-2,r:3+Math.random()*4,c:cols[Math.random()*5|0],a:1}));
-  (function f(){cx.clearRect(0,0,cv.width,cv.height); let alive=0;
-    ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.25;p.a-=.012; if(p.a>0){alive++;cx.globalAlpha=p.a;cx.fillStyle=p.c;cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill();}});
-    cx.globalAlpha=1; if(alive) requestAnimationFrame(f); else cx.clearRect(0,0,cv.width,cv.height);})();
+/* ===================== صدا ===================== */
+let AC=null;
+function play(kind){
+  if(kind==="none") return;
+  try{AC=AC||new (window.AudioContext||window.webkitAudioContext)(); AC.resume&&AC.resume()}catch(e){return}
+  const t0=AC.currentTime;
+  const tone=(f,st,d,type="sine",g=.25,f2)=>{const o=AC.createOscillator(),v=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t0+st);
+    if(f2) o.frequency.exponentialRampToValueAtTime(f2,t0+st+d);
+    v.gain.setValueAtTime(0,t0+st);v.gain.linearRampToValueAtTime(g,t0+st+.01);v.gain.exponentialRampToValueAtTime(.001,t0+st+d);o.connect(v).connect(AC.destination);o.start(t0+st);o.stop(t0+st+d+.05)};
+  ({piano:()=>[523,659,784].forEach((f,i)=>tone(f,i*.12,.5,"triangle")),
+    bell:()=>{tone(1318,0,.8,"sine",.2);tone(1760,.08,.7,"sine",.12)},
+    bird:()=>[0,.12,.24].forEach(s=>tone(2200,s,.09,"sine",.15,3400)),
+    bubble:()=>[0,.1,.2].forEach((s,i)=>tone(300+i*120,s,.12,"sine",.3,900+i*200)),
+    drum:()=>{tone(140,0,.25,"sine",.6,50);tone(140,.18,.25,"sine",.6,50)},
+    magic:()=>[784,988,1175,1568].forEach((f,i)=>tone(f,i*.07,.4,"sine",.15))})[kind]?.();
 }
-function sparkle(el){const r=el.getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2,18,6);}
-function confetti(){burst(innerWidth/2,innerHeight/3,140,14);}
 
-document.documentElement.dir="rtl"; document.documentElement.lang="fa";
-render();
+/* ===================== جشن ===================== */
+const cv=document.getElementById("fx"),cx=cv.getContext("2d"),still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function boom(x,y,n,sp,cols){
+  if(still) return; cv.width=innerWidth;cv.height=innerHeight;
+  cols=cols||["#FF8FB1","#FFC93C","#5CCFB0","#A77BFF","#4FAEF0"];
+  const ps=Array.from({length:n},()=>({x,y,vx:(Math.random()-.5)*sp,vy:-Math.random()*sp-2,r:3+Math.random()*4,c:cols[Math.random()*cols.length|0],a:1}));
+  (function f(){cx.clearRect(0,0,cv.width,cv.height);let live=0;
+    ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.25;p.a-=.012;if(p.a>0){live++;cx.globalAlpha=p.a;cx.fillStyle=p.c;cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill()}});
+    cx.globalAlpha=1;live?requestAnimationFrame(f):cx.clearRect(0,0,cv.width,cv.height)})();
+}
+function spark(el){const r=el.getBoundingClientRect();boom(r.left+r.width/2,r.top+r.height/2,16,6,[colorHex(S.color)||"#FF8FB1",colorHex(S.color2)||"#FFC93C","#FFFFFF"])}
+function party(){boom(innerWidth/2,innerHeight/3,160,15,[colorHex(S.color)||"#FF8FB1",colorHex(S.color2)||"#FFC93C","#5CCFB0","#A77BFF"]); if(S.sound) setTimeout(()=>play(S.sound),200)}
+
+render(false);
 </script>
-
 </body>
 </html>
